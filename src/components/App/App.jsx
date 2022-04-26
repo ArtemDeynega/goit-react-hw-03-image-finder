@@ -24,6 +24,13 @@ export class App extends Component {
     const prevPage = prevState.page;
     const currentPage = this.state.page;
 
+    if (currentPage > 1) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'auto',
+      });
+    }
+
     if (prevQuery !== currentQuery) {
       this.setState({ gallery: [], status: 'pending' });
     }
@@ -80,6 +87,11 @@ export class App extends Component {
       toast.error();
     }
   };
+  handleClickBtn = evt => {
+    this.setState(({ page }) => {
+      return { page: page + 1, status: 'pending' };
+    });
+  };
   render() {
     const { gallery, status } = this.state;
 
@@ -91,7 +103,7 @@ export class App extends Component {
         {status === 'resolved' && (
           <>
             <ImageGallery gallery={gallery} />
-            <Button />
+            <Button onClickBtn={this.handleClickBtn} />
           </>
         )}
         <GlobalStyles />
