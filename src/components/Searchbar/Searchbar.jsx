@@ -30,7 +30,7 @@ export class Searchbar extends Component {
   };
   render() {
     const { searchValue } = this.state;
-    // console.log(searchValue);
+
     return (
       <>
         <Header>
@@ -56,4 +56,3 @@ export class Searchbar extends Component {
     );
   }
 }
-// placeholder = 'Search';

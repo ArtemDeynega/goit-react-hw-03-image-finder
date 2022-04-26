@@ -13,8 +13,10 @@ const getImage = axios.create({
 
 const imagesApi = async (q = '', page = 1) => {
   const params = { q, page };
+
   try {
-    const { data } = await getImage('', params);
+    const { data } = await getImage('', { params });
+
     return data.hits;
   } catch (error) {
     toast.error(`По вашему запросу ${q} не чего не найдено 😔`, {

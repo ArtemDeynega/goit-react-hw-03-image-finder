@@ -1,3 +1,5 @@
 import PropTypes from 'prop-types';
 
-export const ImageGallery = ({}) => {};
+export const ImageGallery = ({ info }) => {
+  return <></>;
+};
