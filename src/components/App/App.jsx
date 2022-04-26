@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Searchbar } from 'components/Searchbar';
 import { ImageGallery } from 'components/ImageGallery';
+import { Button } from 'components/Button';
 
 import imagesApi from 'service/imageApi';
 import { toast, ToastContainer } from 'react-toastify';
@@ -79,13 +80,14 @@ export class App extends Component {
     }
   };
   render() {
-    const { gallery } = this.state;
+    const { gallery, status } = this.state;
+    console.log(status);
 
     return (
       <>
         <Searchbar onSubmit={this.handleNewQuery} />
         <ImageGallery gallery={gallery} />
-
+        {status === 'resolved' && <Button />}
         <GlobalStyles />
         <ToastContainer autoClose={3000} />
       </>
