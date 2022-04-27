@@ -92,7 +92,6 @@ export class App extends Component {
     }
   };
   handleClickBtn = evt => {
-    console.log(evt.code);
     this.setState(({ page }) => {
       return { page: page + 1, status: 'pending' };
     });
@@ -103,7 +102,6 @@ export class App extends Component {
     }));
   };
   handClickImage = evt => {
-    console.log(evt.target);
     const modalImg = evt.target.dataset.src;
     const modalAlt = evt.target.alt;
 
