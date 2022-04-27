@@ -115,7 +115,7 @@ export class App extends Component {
   };
   render() {
     const { gallery, status, showModal, modalAlt, modalImg } = this.state;
-    console.log(modalAlt);
+
     return (
       <>
         <Searchbar onSubmit={this.handleNewQuery} />
