@@ -3,6 +3,7 @@ import { Searchbar } from 'components/Searchbar';
 import { ImageGallery } from 'components/ImageGallery';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
+import { Modal } from 'components/Modal';
 
 import imagesApi from 'service/imageApi';
 import { toast, ToastContainer } from 'react-toastify';
@@ -15,6 +16,9 @@ export class App extends Component {
     page: 1,
     status: 'idle',
     error: null,
+    showModal: false,
+    modalImg: '',
+    modalAlt: '',
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -51,7 +55,7 @@ export class App extends Component {
             });
           } else {
             toast.warn(
-              `По вашему запросу ${currentQuery} не чего не найдено 😔`,
+              `По вашему запросу ${currentQuery} не чего не найдено 😕 `,
               {
                 position: 'top-right',
                 autoClose: 5000,
@@ -88,13 +92,30 @@ export class App extends Component {
     }
   };
   handleClickBtn = evt => {
+    console.log(evt.code);
     this.setState(({ page }) => {
       return { page: page + 1, status: 'pending' };
     });
   };
-  render() {
-    const { gallery, status } = this.state;
+  toogleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+  handClickImage = evt => {
+    console.log(evt.target);
+    const modalImg = evt.target.dataset.src;
+    const modalAlt = evt.target.alt;
 
+    this.setState({
+      showModal: true,
+      modalAlt,
+      modalImg,
+    });
+  };
+  render() {
+    const { gallery, status, showModal, modalAlt, modalImg } = this.state;
+    console.log(modalAlt);
     return (
       <>
         <Searchbar onSubmit={this.handleNewQuery} />
@@ -102,7 +123,15 @@ export class App extends Component {
         {status === 'pending' && <Loader />}
         {status === 'resolved' && (
           <>
-            <ImageGallery gallery={gallery} />
+            {showModal && (
+              <Modal
+                onCloseModal={this.toogleModal}
+                modalAlt={modalAlt}
+                modalImg={modalImg}
+              />
+            )}
+
+            <ImageGallery gallery={gallery} onClickImg={this.handClickImage} />
             <Button onClickBtn={this.handleClickBtn} />
           </>
         )}

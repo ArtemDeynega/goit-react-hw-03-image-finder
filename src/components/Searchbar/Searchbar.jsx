@@ -18,7 +18,7 @@ export class Searchbar extends Component {
     evt.preventDefault();
     const { searchValue } = this.state;
     if (searchValue.trim() === '') {
-      toast.warn(`Введите слово для поиска 😕`);
+      toast.warn(`Введите слово для поиска 🦄`);
       return;
     }
 

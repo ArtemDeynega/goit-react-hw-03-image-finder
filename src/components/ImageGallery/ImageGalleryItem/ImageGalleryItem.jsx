@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { GalleryItem, ImgGalleryItem } from '.';
 
-export const ImageGalleryItem = ({ tags, cardImg, modalImg }) => {
+export const ImageGalleryItem = ({ tags, cardImg, modalImg, onClick }) => {
   return (
     <>
-      <GalleryItem>
-        <ImgGalleryItem src={cardImg} alt={tags} />
+      <GalleryItem onClick={onClick}>
+        <ImgGalleryItem src={cardImg} alt={tags} data-src={modalImg} />
       </GalleryItem>
     </>
   );
